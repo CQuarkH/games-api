@@ -1,0 +1,4 @@
+instance/
+games.db
+__pycache__/
+venv/

@@ -1,0 +1,166 @@
+{
+    "metrics": {
+        "data_sent": {
+            "count": 5098317,
+            "rate": 5186.840108956813
+        },
+        "checks": {
+            "passes": 41352,
+            "fails": 11399,
+            "value": 0.783909309776118
+        },
+        "http_req_duration": {
+            "avg": 3569.846697177458,
+            "min": 0,
+            "med": 1052.362626,
+            "max": 58985.541825,
+            "p(90)": 6730.798951,
+            "p(95)": 13431.6037185,
+            "thresholds": {
+                "p(95)<2000": true
+            }
+        },
+        "http_req_waiting": {
+            "med": 1046.649233,
+            "max": 58985.513895,
+            "p(90)": 6715.671915,
+            "p(95)": 13428.5475155,
+            "avg": 3565.64021858458,
+            "min": 0
+        },
+        "iteration_duration": {
+            "avg": 11535.021139592911,
+            "min": 1003.974007,
+            "med": 6308.780917,
+            "max": 62996.743907,
+            "p(90)": 32054.785958200002,
+            "p(95)": 32670.2175349
+        },
+        "http_req_failed": {
+            "passes": 29029,
+            "fails": 23722,
+            "value": 0.5503023639362287
+        },
+        "http_req_tls_handshaking": {
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "http_reqs": {
+            "count": 52751,
+            "rate": 53.66692627931548
+        },
+        "data_received": {
+            "count": 6891340880,
+            "rate": 7010996.625136833
+        },
+        "http_req_blocked": {
+            "p(90)": 4102.094139,
+            "p(95)": 7122.312286,
+            "avg": 1393.0772918216592,
+            "min": 0,
+            "med": 0.334379,
+            "max": 19597.096586
+        },
+        "vus_max": {
+            "min": 1500,
+            "max": 1500,
+            "value": 1500
+        },
+        "vus": {
+            "value": 2,
+            "min": 2,
+            "max": 1500
+        },
+        "http_req_receiving": {
+            "p(95)": 20.988957999999997,
+            "avg": 4.1633417698622015,
+            "min": -13.293723,
+            "med": 0.513327,
+            "max": 282.357307,
+            "p(90)": 10.278043
+        },
+        "http_req_connecting": {
+            "med": 0.256533,
+            "max": 19597.048596,
+            "p(90)": 4102.055109,
+            "p(95)": 7122.2411114999995,
+            "avg": 1393.016590204394,
+            "min": 0
+        },
+        "iterations": {
+            "count": 52712,
+            "rate": 53.62724911442964
+        },
+        "errors": {
+            "fails": 0,
+            "passes": 11399,
+            "thresholds": {
+                "rate<0.05": true
+            },
+            "value": 1
+        },
+        "http_req_duration{expected_response:true}": {
+            "max": 58823.694492,
+            "p(90)": 5589.4248283,
+            "p(95)": 6586.21004825,
+            "avg": 2434.658297665959,
+            "min": 0.629176,
+            "med": 1375.735711
+        },
+        "http_req_sending": {
+            "avg": 0.04313682299861681,
+            "min": 0,
+            "med": 0.039122,
+            "max": 1.420145,
+            "p(90)": 0.081349,
+            "p(95)": 0.0972185
+        }
+    },
+    "root_group": {
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {},
+        "checks": {
+                "GET /games/:id OK": {
+                    "fails": 3433,
+                    "name": "GET /games/:id OK",
+                    "path": "::GET /games/:id OK",
+                    "id": "0bcd11c676d04c2ae6fdac3ae017f7bd",
+                    "passes": 12534
+                },
+                "DELETE /games/:id OK": {
+                    "name": "DELETE /games/:id OK",
+                    "path": "::DELETE /games/:id OK",
+                    "id": "dc7e432bc984a9a26ae0bb907658e692",
+                    "passes": 2022,
+                    "fails": 553
+                },
+                "PUT /games/:id OK": {
+                    "fails": 1130,
+                    "name": "PUT /games/:id OK",
+                    "path": "::PUT /games/:id OK",
+                    "id": "367d11a4c6582d0c21ccd8f9d5f24d1f",
+                    "passes": 4167
+                },
+                "POST /games OK": {
+                    "path": "::POST /games OK",
+                    "id": "436989537a156e870a44a65e29220719",
+                    "passes": 6024,
+                    "fails": 1715,
+                    "name": "POST /games OK"
+                },
+                "GET /games OK": {
+                    "name": "GET /games OK",
+                    "path": "::GET /games OK",
+                    "id": "74b7c35543b16719454f79560cb64857",
+                    "passes": 16605,
+                    "fails": 4568
+                }
+            },
+        "name": "",
+        "path": ""
+    }
+}

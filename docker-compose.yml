@@ -1,0 +1,101 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: games-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: games_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - games-network
+
+  # Flask API
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: games-api
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:password@postgres:5432/games_db
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - games-network
+
+  # K6 Load Testing (ejecuta automáticamente)
+  k6:
+    image: grafana/k6:latest
+    container_name: games-k6
+    volumes:
+      - ./load-tests/scripts:/scripts
+      - ./load-tests/reports:/reports
+    environment:
+      - BASE_URL=http://api:5000
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - games-network
+    # No ejecuta automáticamente, se ejecuta con docker-compose run
+    entrypoint: ["/bin/sh", "-c", "echo 'K6 listo. Usa: docker-compose run k6-tests'"]
+    profiles:
+      - manual
+
+  # Servicio para ejecutar todas las pruebas automáticamente
+  k6-tests:
+    build:
+      context: ./load-tests
+      dockerfile: k6-tests.Dockerfile
+    container_name: games-k6-tests
+    volumes:
+      - ./load-tests/scripts:/scripts
+      - ./load-tests/reports:/reports
+      - ./load-tests:/load-tests
+    environment:
+      - BASE_URL=http://api:5000
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - games-network
+    working_dir: /scripts
+    command: /load-tests/run-k6-tests.sh
+    profiles:
+      - tests
+
+  # Servicio para generar gráficos PNG desde los resultados
+  generate-graphs:
+    build:
+      context: ./load-tests
+      dockerfile: generate-graphs.Dockerfile
+    container_name: games-graph-generator
+    volumes:
+      - ./load-tests/reports:/app/load-tests/reports
+    profiles:
+      - tools
+
+volumes:
+  postgres_data:
+
+networks:
+  games-network:
+    driver: bridge

@@ -6,13 +6,23 @@ Implementa operaciones CRUD sobre una colección de juegos
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 
 # Configuración para PostgreSQL
-# Formato: postgresql://usuario:password@host:puerto/nombre_bd
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:password@localhost:5432/games_db'
+# Soporta variable de entorno para Docker o usa valor local por defecto
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+    'SQLALCHEMY_DATABASE_URI',
+    'postgresql://postgres:password@localhost:5432/games_db'
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_size': 10,
+    'max_overflow': 20,
+    'pool_pre_ping': True,
+    'pool_recycle': 300,
+}
 
 db = SQLAlchemy(app)
 
@@ -138,6 +148,23 @@ def delete_game(game_id):
         db.session.rollback()
         return jsonify({'error': f'Error interno: {str(e)}'}), 500
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    """Health check endpoint para Docker"""
+    try:
+        # Verificar conexión a la base de datos
+        db.session.execute(db.text('SELECT 1'))
+        return jsonify({
+            'status': 'healthy',
+            'database': 'connected'
+        }), 200
+    except Exception as e:
+        return jsonify({
+            'status': 'unhealthy',
+            'database': 'disconnected',
+            'error': str(e)
+        }), 503
+
 if __name__ == '__main__':
     with app.app_context():
         try:
@@ -146,4 +173,5 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"Error al conectar con PostgreSQL: {e}")
     
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    # Debug=False para mejor rendimiento en pruebas de carga
+    app.run(host ='0.0.0.0', port=5000, debug=False, threaded=True)

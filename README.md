@@ -87,11 +87,11 @@ curl -X DELETE http://localhost:5000/games/1
 
 ## Configuración para producción
 
-Para pruebas de rendimiento con JMeter, modificar en `app.py`:
+Para pruebas de rendimiento con k6, modificar en `app.py`:
 
 ```python
-# Cambiar debug=False para mejor rendimiento
-app.run(host='0.0.0.0', port=5000, debug=False)
+# Ya configurado: debug=False para mejor rendimiento
+app.run(host='0.0.0.0', port=5000, debug=False, threaded=True)
 ```
 
 (Seba) Para usar PostgreSQL o MySQL, cambiar la URI en `app.py`:
@@ -102,16 +102,4 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:password@localhost:54
 
 # MySQL
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://user:password@localhost:3306/games_db'
-```
 
-## Estructura del proyecto
-
-```
-games-api/
-├── app.py              # API principal con endpoints CRUD
-├── requirements.txt    # Dependencias Python
-├── seed.py            # Script para cargar datos de prueba
-├── README.md          # Este archivo
-└── instance/
-    └── games.db       # Base de datos SQLite (se crea automáticamente)
-```

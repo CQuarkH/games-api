@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Pruebas de Carga - Games API</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .timestamp { font-size: 0.9em; opacity: 0.9; }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .card .value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+        .card .label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .test-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-section h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .metrics-table th {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid #dee2e6;
+        }
+        .metrics-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .metrics-table tr:hover {
+            background: #f8f9fa;
+        }
+        .graph {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .graph img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .status-success { background: #d4edda; color: #155724; }
+        .status-warning { background: #fff3cd; color: #856404; }
+        .status-error { background: #f8d7da; color: #721c24; }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Reporte de Pruebas de Carga y Estrés</h1>
+            <p class="timestamp">Generado: 2025-11-29 12:16:35</p>
+            <p>Games API - Sistema de Gestión de Juegos</p>
+        </header>
+
+        <div class="summary-cards">
+            <div class="card">
+                <h3>Pruebas Ejecutadas</h3>
+                <div class="value">3</div>
+                <div class="label">Tests completados</div>
+            </div>
+            <div class="card">
+                <h3>Total Requests</h3>
+                <div class="value">61364</div>
+                <div class="label">Peticiones procesadas</div>
+            </div>
+            <div class="card">
+                <h3>Tasa de Error Promedio</h3>
+                <div class="value">62.94%</div>
+                <div class="label">Across all tests</div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Seed <span class="status-error status-badge">Con Errores</span></h2>
+
+            <h3>Tiempos de Respuesta</h3>
+            <table class="metrics-table">
+                <tr>
+                    <th>Métrica</th>
+                    <th>Valor (ms)</th>
+                </tr>
+
+                <tr><td>avg</td><td>11.69 ms</td></tr>
+
+                <tr><td>min</td><td>3.98 ms</td></tr>
+
+                <tr><td>med</td><td>7.18 ms</td></tr>
+
+                <tr><td>max</td><td>48.61 ms</td></tr>
+
+                <tr><td>p(90)</td><td>26.36 ms</td></tr>
+
+                <tr><td>p(95)</td><td>42.94 ms</td></tr>
+</table>
+            <h3>Throughput</h3>
+            <table class="metrics-table">
+                <tr><th>Métrica</th><th>Valor</th></tr>
+                <tr><td>Total Requests</td><td>100</td></tr>
+                <tr><td>Request Rate</td><td>86.77 req/s</td></tr>
+            </table>
+
+            <h3>Tasa de Éxito</h3>
+            <table class="metrics-table">
+                <tr><th>Métrica</th><th>Valor</th></tr>
+                <tr><td>Error Rate</td><td>100.00%</td></tr>
+                <tr><td>Success Rate</td><td>0.00%</td></tr>
+            </table>
+
+            <div class="graph">
+                <h3>Gráficos de Rendimiento</h3>
+                <img src="seed-graph.png" alt="Seed Results">
+            </div>
+</div>
+        <div class="test-section">
+            <h2>Spike Test <span class="status-error status-badge">Con Errores</span></h2>
+
+            <h3>Tiempos de Respuesta</h3>
+            <table class="metrics-table">
+                <tr>
+                    <th>Métrica</th>
+                    <th>Valor (ms)</th>
+                </tr>
+
+                <tr><td>avg</td><td>4151.99 ms</td></tr>
+
+                <tr><td>min</td><td>0.00 ms</td></tr>
+
+                <tr><td>med</td><td>1469.01 ms</td></tr>
+
+                <tr><td>max</td><td>57934.28 ms</td></tr>
+
+                <tr><td>p(90)</td><td>7677.71 ms</td></tr>
+
+                <tr><td>p(95)</td><td>9819.86 ms</td></tr>
+</table>
+            <h3>Throughput</h3>
+            <table class="metrics-table">
+                <tr><th>Métrica</th><th>Valor</th></tr>
+                <tr><td>Total Requests</td><td>8513</td></tr>
+                <tr><td>Request Rate</td><td>21.83 req/s</td></tr>
+            </table>
+
+            <h3>Tasa de Éxito</h3>
+            <table class="metrics-table">
+                <tr><th>Métrica</th><th>Valor</th></tr>
+                <tr><td>Error Rate</td><td>43.85%</td></tr>
+                <tr><td>Success Rate</td><td>56.15%</td></tr>
+            </table>
+
+            <div class="graph">
+                <h3>Gráficos de Rendimiento</h3>
+                <img src="spike-test-graph.png" alt="Spike Test Results">
+            </div>
+</div>
+        <div class="test-section">
+            <h2>Stress Test <span class="status-error status-badge">Con Errores</span></h2>
+
+            <h3>Tiempos de Respuesta</h3>
+            <table class="metrics-table">
+                <tr>
+                    <th>Métrica</th>
+                    <th>Valor (ms)</th>
+                </tr>
+
+                <tr><td>avg</td><td>3569.85 ms</td></tr>
+
+                <tr><td>min</td><td>0.00 ms</td></tr>
+
+                <tr><td>med</td><td>1052.36 ms</td></tr>
+
+                <tr><td>max</td><td>58985.54 ms</td></tr>
+
+                <tr><td>p(90)</td><td>6730.80 ms</td></tr>
+
+                <tr><td>p(95)</td><td>13431.60 ms</td></tr>
+</table>
+            <h3>Throughput</h3>
+            <table class="metrics-table">
+                <tr><th>Métrica</th><th>Valor</th></tr>
+                <tr><td>Total Requests</td><td>52751</td></tr>
+                <tr><td>Request Rate</td><td>53.67 req/s</td></tr>
+            </table>
+
+            <h3>Tasa de Éxito</h3>
+            <table class="metrics-table">
+                <tr><th>Métrica</th><th>Valor</th></tr>
+                <tr><td>Error Rate</td><td>44.97%</td></tr>
+                <tr><td>Success Rate</td><td>55.03%</td></tr>
+            </table>
+
+            <div class="graph">
+                <h3>Gráficos de Rendimiento</h3>
+                <img src="stress-test-graph.png" alt="Stress Test Results">
+            </div>
+</div>
+        <footer>
+            <p>Reporte generado automáticamente por el sistema de pruebas de carga</p>
+            <p>Games API - Pruebas con k6 y Docker</p>
+        </footer>
+    </div>
+</body>
+</html>

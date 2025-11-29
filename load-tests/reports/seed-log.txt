@@ -1,0 +1,22 @@
+
+          /\      |‾‾| /‾‾/   /‾‾/   
+     /\  /  \     |  |/  /   /  /    
+    /  \/    \    |     (   /   ‾‾\  
+   /          \   |  |\  \ |  (‾)  | 
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: /scripts/seed-data.js
+     output: InfluxDBv1 (http://influxdb:8086)
+
+  scenarios: (100.00%) 1 scenario, 10 max VUs, 10m30s max duration (incl. graceful stop):
+           * default: 100 iterations shared among 10 VUs (maxDuration: 10m0s, gracefulStop: 30s)
+
+
+running (00m01.0s), 10/10 VUs, 81 complete and 0 interrupted iterations
+default   [  81% ] 10 VUs  00m01.0s/10m0s  081/100 shared iters
+
+✅ Seeding completado: 100 juegos creados
+
+running (00m01.2s), 00/10 VUs, 100 complete and 0 interrupted iterations
+default ✓ [ 100% ] 10 VUs  00m01.2s/10m0s  100/100 shared iters
